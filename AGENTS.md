@@ -68,6 +68,7 @@ See `DEVELOPMENT.md` for the current command surface and packaging/release check
 - Non-word, non-space segments are break opportunities, same as words.
 - CJK grapheme splitting plus kinsoku merging keeps prohibited punctuation attached to adjacent graphemes.
 - Emoji correction is auto-detected per font size, constant per emoji grapheme, and effectively font-independent.
+- Re-test the macOS emoji and `system-ui` canvas/DOM bugs in a headed browser on a Retina display. Headless Chrome and Firefox at `devicePixelRatio = 1` mask both classes and are not valid regression checks for them.
 - Bidi levels now stay on the rich `prepareWithSegments()` path as custom-rendering metadata only. The opaque fast `prepare()` handle should not pay for bidi metadata that `layout()` does not consume, and line breaking itself does not read those levels.
 - The rich-path bidi classifier now comes from checked-in generated Unicode range data. Refresh it manually with `bun run generate:bidi-data`; do not turn that into a normal build step.
 - A larger pure-TS Unicode stack like `text-shaper` is useful as reference material, especially for Unicode coverage and richer bidi metadata, but its runtime segmentation and greedy glyph-line breaker are not replacements for our browser-facing `Intl.Segmenter` + preprocessing + canvas-measurement model.
